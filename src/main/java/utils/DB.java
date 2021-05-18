@@ -7,13 +7,12 @@ public class DB {
 	private Connection connection = null;
 	
 	public DB() throws Exception {
-		
 		// WITHOUT POOL
 		String user = "mysql";
 		String password="prac";
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		connection=DriverManager.getConnection("jdbc:mysql://localhost/lab2?user="+user+"&password="+password);
-
+		
 	}
 	
 	//execute queries

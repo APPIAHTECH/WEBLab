@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
 
 import managers.ManageUsers;
+import managers.model;
 import models.User;
 
 /**
  * Servlet implementation class FormController
+ * TO solve time zone issue use SET GLOBAL time_zone = '-3:00'; on Msql server
  */
 @WebServlet("/FormController")
 public class FormController extends HttpServlet {
@@ -41,8 +43,17 @@ public class FormController extends HttpServlet {
 		
 		try {
 			BeanUtils.populate(model,request.getParameterMap());
+			System.out.print(model.toString());
 			if (manager.isComplete(model)) {
-				manager.addUser(model.getUser(), model.getMail(), model.getPwd1());
+				
+				
+				manager.addUser(
+						model.getUser(), 
+						model.getMail(), 
+						model.getPwd1(),
+						model.getDate(),
+						model.getGender()
+						);
 				manager.finalize();
 				view = "Registered.jsp";
 			}

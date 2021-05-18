@@ -32,6 +32,21 @@ input:invalid {
   <input type="password" id="pwd1" name="pwd1" placeholder="Password" value="<%=((User)request.getAttribute("model")).getPwd1()%>" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"><br>
   <label for="pwd2"> Confirm Password: </label><br>
   <input type="password" id="pwd2" name="pwd2" placeholder="Confirm Password" value="<%=((User)request.getAttribute("model")).getPwd2()%>" required><br><br>
+  
+  <! -- Add Gender field -->
+  <label for="gender"> Gender:</label><br>
+  <select id="gender" name="gender">
+  	<option value="<%=((User)request.getAttribute("model")).getGender()%>">Male</option>
+  	<option value="<%=((User)request.getAttribute("model")).getGender()%>">Female</option>
+  </select>
+  <br>
+  
+  <! -- Add Date of Birth -->
+  <label for="date"> Date of Birth:</label><br>
+  <input type="date" id="user" name="date" value="<%=((User)request.getAttribute("model")).getDate()%>"><br>
+  
+
+  
   <button> Submit </button>
 </form>
 <script>
