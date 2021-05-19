@@ -43,10 +43,9 @@ public class FormController extends HttpServlet {
 		
 		try {
 			BeanUtils.populate(model,request.getParameterMap());
+			model.setGender(request.getParameter("gender"));
 			System.out.print(model.toString());
 			if (manager.isComplete(model)) {
-				
-				
 				manager.addUser(
 						model.getUser(), 
 						model.getMail(), 

@@ -29,15 +29,15 @@ input:invalid {
   <label for="mail"> Mail  </label><br>
   <input type="email" id="mail" name="mail" placeholder="Mail" value="<%=((User)request.getAttribute("model")).getMail()%>" required><br>
   <label for="pwd1"> Password: </label><br>
-  <input type="password" id="pwd1" name="pwd1" placeholder="Password" value="<%=((User)request.getAttribute("model")).getPwd1()%>" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"><br>
+  <input type="password" id="pwd1" name="pwd1" placeholder="Password" value="<%=((User)request.getAttribute("model")).getPwd1()%>" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"><br>
   <label for="pwd2"> Confirm Password: </label><br>
   <input type="password" id="pwd2" name="pwd2" placeholder="Confirm Password" value="<%=((User)request.getAttribute("model")).getPwd2()%>" required><br><br>
   
   <! -- Add Gender field -->
   <label for="gender"> Gender:</label><br>
   <select id="gender" name="gender">
-  	<option value="<%=((User)request.getAttribute("model")).getGender()%>">Male</option>
-  	<option value="<%=((User)request.getAttribute("model")).getGender()%>">Female</option>
+  	<option value="male">Male</option>
+  	<option value="female">Female</option>
   </select>
   <br>
   

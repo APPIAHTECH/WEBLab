@@ -15,7 +15,7 @@ public class User implements java.io.Serializable {
   		PRIMARY KEY (`usr`),
   		UNIQUE KEY `mail` (`mail`)
 	 ); 
-	 * 
+	 * old: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$
 	 */
 	
 	private static final long serialVersionUID = 1L;
@@ -25,7 +25,7 @@ public class User implements java.io.Serializable {
     private static final String PASSWORD_PATTERN =
             "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
     
-    private static final String FRONT_END_PASSWORD_PATTERN  = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$";
+    private static final String FRONT_END_PASSWORD_PATTERN  = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}";
     
     private static final Pattern pattern = Pattern.compile(FRONT_END_PASSWORD_PATTERN);
     
