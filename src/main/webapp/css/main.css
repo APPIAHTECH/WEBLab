@@ -1,0 +1,11 @@
+@charset "ISO-8859-1";
+
+.flex{
+	display: flex;
+}
+.left, .content{
+	width: 50%;
+	margin: 10px
+}
+.content{ width:780%;}
+.left{ width: 30%;}
