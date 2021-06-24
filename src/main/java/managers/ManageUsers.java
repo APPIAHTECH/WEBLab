@@ -34,7 +34,7 @@ public class ManageUsers {
 	
 	/* Get a user given its PK*/
 	public User getUser(Integer id) {
-		String query = "SELECT id,name,mail FROM users WHERE id = ? ;";
+		String query = "SELECT id,name,mail,user_type FROM users WHERE id = ? ;";
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 		User user = null;
@@ -47,6 +47,7 @@ public class ManageUsers {
 				user.setId(rs.getInt("id"));
 				user.setName(rs.getString("name"));
 				user.setMail(rs.getString("mail"));
+				user.setUserType(rs.getString("user_type"));
 			}
 			rs.close();
 			statement.close();
@@ -75,6 +76,31 @@ public class ManageUsers {
 		}
 	}
 	
+	//Delete user
+	public void deleteUser(Integer uid) {
+		String query = "delete FROM follows where follows.fid = ?;";
+		PreparedStatement statement = null;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1,uid);
+			statement.executeUpdate();
+			
+			query = "delete FROM users where users.id = ?;";
+			statement = db.prepareStatement(query);
+			statement.setInt(1,uid);
+			statement.executeUpdate();
+			
+			query = "delete FROM tweets where tweets.uid = ?;";
+			statement = db.prepareStatement(query);
+			statement.setInt(1,uid);
+			statement.executeUpdate();
+			
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	// Follow a user
 	public void followUser(Integer uid, Integer fid) {
 		String query = "INSERT INTO follows (uid,fid) VALUES (?,?)";
@@ -272,6 +298,13 @@ public class ManageUsers {
 	    return(hasValue(user.getName()) &&
 	    	   hasValue(user.getMail()) &&
 	    	   hasValue(user.getPwd()) );
+	}
+	
+	/*Check if all the user is admin are filled correctly */
+	public boolean isAdmin(User user) {
+		User us = this.getUser(user.getId());
+		if( us.getUserType().toLowerCase().compareTo("admin") == 0) return true;
+		return false;
 	}
 	
 	public boolean isLoginComplete(User user) {

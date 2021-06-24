@@ -13,6 +13,7 @@ public class User implements java.io.Serializable {
 	private String name = "";
 	private String mail = "";
 	private String pwd = "";
+	private String userType = "regular";
 
 	private HashMap<String,Boolean> error = null;
 	
@@ -35,8 +36,16 @@ public class User implements java.io.Serializable {
 		return this.name;
 	}
 	
+	public String getUserType() {
+		return this.userType;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setUserType(String type) {
+		this.userType = type;
 	}
 	
 	public String getMail() {

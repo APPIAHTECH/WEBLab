@@ -68,6 +68,35 @@ $(document).ready(function(){
 		});
 		event.preventDefault();
 	});
+	
+	/* View admin, user tweets page*/
+	$(document).on("click",".viewTweetPageBTN",function(event) {
+		var user = $(this).parent();
+		$.post( "AdminViewTweetsController", { userID: $(this).parent().attr("id") }, function(event) { 
+			$("#content").load("AdminViewTweetsController");		
+		});
+		event.preventDefault();
+	});
+	
+	/* View edit user page*/
+	$(document).on("click",".viewTweetPage",function(event) {
+		var user = $(this).parent();
+		console.log($(this).parent().attr("id") )
+		$.post( "GetUserTweets", { userID: $(this).parent().attr("id") }, function(event) { 
+			$("#content").load("GetUserTweets");		
+		});
+		event.preventDefault();
+	});
+	
+	/* View delete user page*/
+	$(document).on("click",".viewDeletePage",function(event) {
+		var user = $(this).parent();
+		console.log($(this).parent().attr("id") )
+		$.post( "DelUser", { userID: $(this).parent().attr("id") }, function(event) { 
+			$("#content").load("DelUser");		
+		});
+		event.preventDefault();
+	});
 });
 </script>
 </head>
