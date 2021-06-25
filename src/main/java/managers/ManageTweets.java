@@ -61,6 +61,22 @@ public class ManageTweets {
 		}
 	}
 	
+	/* Update existing tweet */
+	public void updateTweet(Tweet tweet,Integer uid) {
+		String query = "UPDATE tweets,users SET tweets.content=? WHERE tweets.id=? and users.id=?";
+		PreparedStatement statement = null;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1, tweet.getContent());
+			statement.setInt(2, tweet.getId());
+			statement.setInt(3, uid);
+			statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	/* Get tweets from a user given start and end*/
 	public List<Tweet> getUserTweets(Integer uid,Integer start, Integer end) {
@@ -88,6 +104,32 @@ public class ManageTweets {
 			e.printStackTrace();
 		} 
 		return  l;
+	}
+	
+	
+	/* Get 1 tweets from a user given */
+	public Tweet getUserTweet(Integer uid,Integer id) {
+		 String query = "SELECT tweets.id,tweets.uid,tweets.postdatetime,tweets.content,users.name FROM tweets INNER JOIN users ON tweets.uid = users.id where tweets.uid = ? and tweets.id = ?";
+		 PreparedStatement statement = null;
+		 Tweet tweet = new Tweet();
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1,uid);
+			 statement.setInt(2,id);
+			 ResultSet rs = statement.executeQuery();
+			 while (rs.next()) {
+       		     tweet.setId(rs.getInt("id"));
+				 tweet.setUid(rs.getInt("uid"));
+				 tweet.setPostDateTime(rs.getTimestamp("postdatetime"));
+				 tweet.setContent(rs.getString("content"));
+				 tweet.setUname(rs.getString("name"));
+			 }
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return  tweet;
 	}
 	
 	

@@ -116,6 +116,31 @@ $(document).ready(function(){
 		});
 		event.preventDefault();
 	});
+	/* Delete admin, tweet */
+	$(document).on("click",".adminDelTweet",function(event){
+		var tweet = $(this).parent();
+		$.post( "AdminDelTweet", { id: $(this).parent().attr("id") } , function(event) {
+			$("#content").load("AdminDelTweet");				
+		});
+		event.preventDefault();
+	});
+	
+	/* View edit tweet page, save btn update info*/
+	$(document).on("click",".updateTweetInfo",function(event) {
+		var user = $(this).parent();
+		console.log($(this).data("id") )
+		console.log( $(this).data("userid"));
+		console.log($("input[name=inputTweetContent]").val());
+		$.post( "AdminEditTweet", 
+			{
+				userID: $(this).data("userid") ,
+				id: $(this).data("id") ,
+				tweetContent: $("input[name=inputTweetContent]").val()
+			}, function(event) { 
+			$("#content").load("AdminEditTweet");		
+		});
+		event.preventDefault();
+	});
 });
 </script>
 </head>
