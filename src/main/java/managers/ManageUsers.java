@@ -101,6 +101,22 @@ public class ManageUsers {
 		}
 	}
 
+	//Update user
+	public void updateUser(User user) {
+		String query = "UPDATE users SET users.name=?,users.mail=? WHERE users.id=?";
+		PreparedStatement statement = null;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1,user.getName());
+			statement.setString(2,user.getMail());
+			statement.setInt(3,user.getId());
+			System.out.println("Statmen -> "+statement);
+			statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	// Follow a user
 	public void followUser(Integer uid, Integer fid) {
 		String query = "INSERT INTO follows (uid,fid) VALUES (?,?)";

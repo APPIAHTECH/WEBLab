@@ -60,6 +60,7 @@ public class User implements java.io.Serializable {
 			this.mail = mail;
 		} else {
 			error.put("mail", true);
+			System.out.println("Error Email, Bad mail input");
 		}
 		
 	}

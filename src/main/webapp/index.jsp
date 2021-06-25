@@ -79,11 +79,30 @@ $(document).ready(function(){
 	});
 	
 	/* View edit user page*/
-	$(document).on("click",".viewTweetPage",function(event) {
+	$(document).on("click",".viewEditPage",function(event) {
 		var user = $(this).parent();
 		console.log($(this).parent().attr("id") )
-		$.post( "GetUserTweets", { userID: $(this).parent().attr("id") }, function(event) { 
-			$("#content").load("GetUserTweets");		
+		$.post( "AdminUserEditController", { userID: $(this).parent().attr("id") }, function(event) { 
+			$("#content").load("AdminUserEditController");		
+		});
+		event.preventDefault();
+	});
+	
+	/* View edit user page, save btn update info*/
+	$(document).on("click",".updateUserInfo",function(event) {
+		var user = $(this).parent();
+		console.log($(this).data("id") )
+		console.log($(this).data("name") )
+		console.log($(this).data("mail") )
+		console.log($("input[name=inputText]").val());
+		console.log($("input[name=inputEmail]").val());
+		$.post( "UpdateUserController", 
+			{ 
+				userID: $(this).data("id") ,
+				name: $("input[name=inputText]").val(),
+				mail: $("input[name=inputEmail]").val()
+			}, function(event) { 
+			$("#content").load("UpdateUserController");		
 		});
 		event.preventDefault();
 	});
