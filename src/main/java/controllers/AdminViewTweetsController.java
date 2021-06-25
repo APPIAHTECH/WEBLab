@@ -22,6 +22,7 @@ import models.User;
 @WebServlet("/AdminViewTweetsController")
 public class AdminViewTweetsController extends HttpServlet {
 	public String paramValue = "";
+	int userID = -1;
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -44,12 +45,12 @@ public class AdminViewTweetsController extends HttpServlet {
 			
 	        if(request.getParameter("userID") != null) {
 	        	paramValue = request.getParameter("userID");
-	        	int userID = Integer.parseInt(paramValue);
-	        	user.setId(userID);
+	        	userID = Integer.parseInt(paramValue);
+	        	//user.setId(userID);
 	        }
-	        
 			ManageTweets tweetManager = new ManageTweets();
-			tweets = tweetManager.getUserTweets(user.getId(),0,4);
+			tweets = tweetManager.getUserTweets(userID,0,4);
+			
 			tweetManager.finalize();
 		}
 		request.setAttribute("user",user);

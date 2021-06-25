@@ -57,7 +57,6 @@ public class AdminProfileController extends HttpServlet {
 			User u = new User();
 			u = (User) session.getAttribute("user");
 			ManageUsers manager = new ManageUsers();
-			System.out.println("hey" +u.getName());
 			if(manager.isAdmin(u))
 			{
 				System.out.println("Admin Controller: active session has been found.");

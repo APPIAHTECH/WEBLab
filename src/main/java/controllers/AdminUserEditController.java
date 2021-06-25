@@ -20,7 +20,7 @@ import models.User;
 public class AdminUserEditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public String paramValue;
-       
+	int userID = -1;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,7 +38,7 @@ public class AdminUserEditController extends HttpServlet {
 		ManageUsers manager = new ManageUsers();
 		if (session != null || user != null) {
 	        if(request.getParameter("userID") != null) paramValue = request.getParameter("userID");
-	    	int userID = Integer.parseInt(paramValue);
+	    	userID = Integer.parseInt(paramValue);
 	    	user = manager.getUser( userID );
 	    	request.setAttribute("user",user);
 			manager.finalize();

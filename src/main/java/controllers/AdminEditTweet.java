@@ -25,6 +25,7 @@ import models.User;
 public class AdminEditTweet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public String paramValue;
+	int userID = -1, tweetID = -1;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,7 +42,7 @@ public class AdminEditTweet extends HttpServlet {
 		ManageTweets tweetManager = new ManageTweets();
 		HttpSession session = request.getSession(false);
 		User user = new User();
-		int userID = -1, tweetID = -1;
+		
 		if (session != null || user != null) {
 		    if(request.getParameter("userID") != null && request.getParameter("id") != null && request.getParameter("tweetContent") != null) 
 		    {
