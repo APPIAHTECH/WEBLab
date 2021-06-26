@@ -77,10 +77,26 @@ public class ManageTweets {
 		}
 	}
 	
+	/* Add comment to tweet */
+	public void addComment(Tweet tweet, Integer uid) {
+		String query = "INSERT INTO comments (`id`,`uid`,`comment`,`tid`) VALUES (0, ?, ?, ?);";
+		PreparedStatement statement = null;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			statement.setString(2, tweet.getComment());
+			statement.setInt(3, tweet.getId());
+			statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/* Get tweets from a user given start and end*/
 	public List<Tweet> getUserTweets(Integer uid,Integer start, Integer end) {
 		 String query = "SELECT tweets.id,tweets.uid,tweets.postdatetime,tweets.content,users.name FROM tweets INNER JOIN users ON tweets.uid = users.id where tweets.uid = ? ORDER BY tweets.postdatetime DESC LIMIT ?,? ;";
+		
 		 PreparedStatement statement = null;
 		 List<Tweet> l = new ArrayList<Tweet>();
 		 try {
@@ -96,6 +112,32 @@ public class ManageTweets {
 				 tweet.setPostDateTime(rs.getTimestamp("postdatetime"));
 				 tweet.setContent(rs.getString("content"));
 				 tweet.setUname(rs.getString("name"));
+				 l.add(tweet);
+			 }
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return  l;
+	}
+	
+	/* Get tweets coment from a user given start and end*/
+	public List<Tweet> getUserCommentTweets(Integer id,Integer start, Integer end) {
+		 String query = "select uid, comment, tid FROM comments where tid= ? ORDER BY comments.tid DESC LIMIT ?,?;";
+		 PreparedStatement statement = null;
+		 List<Tweet> l = new ArrayList<Tweet>();
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1,id);
+			 statement.setInt(2,start);
+			 statement.setInt(3,end);
+			 ResultSet rs = statement.executeQuery();
+			 while (rs.next()) {
+				 Tweet tweet = new Tweet();
+       		     tweet.setId(rs.getInt("tid"));
+				 tweet.setUid(rs.getInt("uid"));
+				 tweet.setComment(rs.getString("comment"));
 				 l.add(tweet);
 			 }
 			 rs.close();

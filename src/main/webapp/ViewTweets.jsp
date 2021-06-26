@@ -10,7 +10,8 @@
    <p> ${t.content} </p>
    <button type="button" class="viewEditTweetPage w3-button w3-red w3-margin-bottom">Edit</button> 
    <button type="button" class="likeTweet w3-button w3-theme w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
-   <button type="button" class="delTweet w3-button w3-red w3-margin-bottom"><i class="fa fa-trash"></i> &nbsp;Delete</button> 
+   <button type="button" class="delTweet w3-button w3-red w3-margin-bottom"><i class="fa fa-trash"></i> &nbsp;Delete</button>
+   <button type="button" data-userid="${t.uid}" class="viewCommentTweet w3-button w3-red w3-margin-bottom">Comment</button> 
  </div>
 </c:forEach>
 
@@ -22,6 +23,7 @@
    <hr class="w3-clear">
    <p> ${tf.content} </p>
    <button type="button" class="likeTweet w3-button w3-theme w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
-   <button type="button" class="delTweet w3-button w3-red w3-margin-bottom"><i class="fa fa-trash"></i> &nbsp;Delete</button> 
+   <button type="button" class="delTweet w3-button w3-red w3-margin-bottom"><i class="fa fa-trash"></i> &nbsp;Delete</button>
+   <button data-userid="${tf.uid}" type="button" class="viewCommentTweet w3-button w3-red w3-margin-bottom">Comment</button> 
  </div>
 </c:forEach>

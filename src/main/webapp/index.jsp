@@ -180,6 +180,35 @@ $(document).ready(function(){
 		});
 		event.preventDefault();
 	});
+	/* Comment */
+	$(document).on("click",".viewCommentTweet",function(event){
+		var tweet = $(this).parent();
+		console.log($(this).parent().attr("id"))
+		console.log( $(this).data("userid") )
+		$.post( "CommentController", { 
+			userID: $(this).data("userid") ,
+			id: $(this).parent().attr("id")
+			} , function(event) {
+			$("#content").load("CommentController");				
+		});
+		event.preventDefault();
+	});
+	/* View updateTweetComment*/
+	$(document).on("click",".updateTweetComment",function(event) {
+		var user = $(this).parent();
+		console.log($(this).data("id") )
+		console.log( $(this).data("userid"));
+		console.log($("textarea[name=inputTweetComment]").val());
+		$.post( "AddCommentController", 
+			{
+				userID: $(this).data("userid") ,
+				id: $(this).data("id") ,
+				comment: $("textarea[name=inputTweetComment]").val()
+			}, function(event) { 
+			$("#content").load("AddCommentController");		
+		});
+		event.preventDefault();
+	});
 });
 </script>
 </head>

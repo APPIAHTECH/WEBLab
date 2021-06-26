@@ -17,5 +17,6 @@
    <hr class="w3-clear">
    <p> ${t.content} </p>
    <button type="button" class="likeTweet w3-button w3-theme w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
+   <button type="button" data-userid="${t.uid}" class="viewCommentTweet w3-button w3-red w3-margin-bottom">Comment</button> 
  </div>
 </c:forEach>

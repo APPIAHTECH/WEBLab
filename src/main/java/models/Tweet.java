@@ -10,6 +10,7 @@ public class Tweet implements java.io.Serializable {
 	 private String uname;
 	 private Timestamp postDateTime;
 	 private String content;
+	 private String comment;
 
 	 public Tweet() {
 	 }
@@ -37,6 +38,11 @@ public class Tweet implements java.io.Serializable {
 	 public void setUname(String uname) {
 		 this.uname = uname;
 	 }
+	 
+	 public void setComment(String comment) {
+		 this.comment = comment;
+	 }
+	 public String getComment() { return this.comment;}
 	 
 	 public Timestamp getPostDateTime() {
 		 return this.postDateTime;
