@@ -161,6 +161,25 @@ $(document).ready(function(){
 		});
 		event.preventDefault();
 	});
+	/*whoToFollow*/
+	$(document).on("click",".whoToFollow",function(event){
+		var tweet = $(this).parent();
+		console.log($(this).parent().attr("id"))
+		$.post( "WhoToFollowController", { id: $(this).parent().attr("id") } , function(event) {
+			$("#content").load("WhoToFollowController");				
+		});
+		event.preventDefault();
+	});
+	
+	/* View userInfo btn, Buddies Info*/
+	$(document).on("click",".userInfo",function(event){
+		var tweet = $(this).parent();
+		console.log($(this).parent().attr("id"))
+		$.post( "UserInfoController", { userID: $(this).parent().attr("id") } , function(event) {
+			$("#content").load("UserInfoController");				
+		});
+		event.preventDefault();
+	});
 });
 </script>
 </head>
