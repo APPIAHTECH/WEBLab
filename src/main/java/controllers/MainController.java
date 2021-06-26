@@ -63,7 +63,6 @@ public class MainController extends HttpServlet {
 		
 		if (session==null || session.getAttribute("user")==null) {
 			System.out.println("MainController: NO active session has been found.");
-			
 			request.setAttribute("menu","ViewMenuNotLogged.jsp");
 			//request.setAttribute("content","ViewLoginForm.jsp");
 			request.setAttribute("content","ViewHome.jsp");

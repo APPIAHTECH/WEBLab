@@ -14,62 +14,57 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import managers.ManageTweets;
-import managers.ManageUsers;
 import models.Tweet;
 import models.User;
 
 /**
- * Servlet implementation class dTcontroller
+ * Servlet implementation class EditTweetController
  */
-@WebServlet("/GetUserTweets")
-public class GetUserTweets extends HttpServlet {
+@WebServlet("/EditTweetController")
+public class EditTweetController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	public String paramValue;
+	int userID = -1, tweetID = -1;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetUserTweets() {
+    public EditTweetController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session = request.getSession(false);
-		List<Tweet> tweets = Collections.emptyList();
-		List<Tweet> tweets_view_follow = new ArrayList<Tweet>();
+		List<Tweet> tweets = new ArrayList<Tweet>();
 		User user = (User) session.getAttribute("user");
-		List<User> userFolow = Collections.emptyList();
 		
 		if (session != null || user != null) {
+			
+	        if(request.getParameter("id") != null) {
+	        	paramValue = request.getParameter("id");
+	        	tweetID = Integer.parseInt(paramValue);
+	        	System.out.println(tweetID);
+	        }
 			ManageTweets tweetManager = new ManageTweets();
-			ManageUsers manageUser = new ManageUsers();
-			tweets = tweetManager.getUserTweets(user.getId(),0,4);
-			//Personalized timeline which shows tweets only from the users they follow.
-			userFolow = manageUser.getFollowedUsers(user.getId(), 0, 4);
-			for(User us: userFolow)
-			{
-				List<Tweet> temp_tweet = tweetManager.getUserTweets(us.getId(), 0, 4);
-				for(Tweet t: temp_tweet) tweets_view_follow.add(t);
-			}
+			tweets.add(tweetManager.getUserTweet(user.getId(), tweetID));
+			System.out.println(tweets);
 			tweetManager.finalize();
 		}
-
+		request.setAttribute("user",user);
 		request.setAttribute("tweets",tweets);
-		request.setAttribute("tweets_follow", tweets_view_follow);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewTweets.jsp"); 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewEditTweet.jsp"); 
 		dispatcher.forward(request,response);
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
 }
-

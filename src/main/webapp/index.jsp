@@ -40,6 +40,16 @@ $(document).ready(function(){
 		});
 		event.preventDefault();
 	});
+	
+	/* Edit user profile editUser */
+	$(document).on("click",".editUser",function(event){
+		var tweet = $(this).parent();
+		$.post( "EditProfileController", { id: $(this).parent().attr("id") } , function(event) {
+			$("#content").load("EditProfileController");				
+		});
+		event.preventDefault();
+	});
+	
 	/* Follow user */
 	$(document).on("click",".followUser",function(event){
 		var user = $(this).parent();
@@ -121,6 +131,16 @@ $(document).ready(function(){
 		var tweet = $(this).parent();
 		$.post( "AdminDelTweet", { id: $(this).parent().attr("id") } , function(event) {
 			$("#content").load("AdminDelTweet");				
+		});
+		event.preventDefault();
+	});
+	
+	/* Edit, tweet */
+	$(document).on("click",".viewEditTweetPage",function(event){
+		var tweet = $(this).parent();
+		console.log($(this).parent().attr("id"))
+		$.post( "EditTweetController", { id: $(this).parent().attr("id") } , function(event) {
+			$("#content").load("EditTweetController");				
 		});
 		event.preventDefault();
 	});
