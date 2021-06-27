@@ -17,6 +17,16 @@
 <h4> Comments </h4>
 <c:forEach var="t" items="${comment}">       
  <div id="${t.id}"  class="w3-container w3-card w3-section w3-white w3-round w3-animate-opacity"><br>
-   <p>${t.comment}</p>
+    <p>${t.comment}</p>
+	 <c:choose>
+	    <c:when test="${user.id== t.uid}">
+	        <button data-cid="${t.cid}" type="button" class="commentEdit w3-row w3-button w3-green w3-section">Edit</button>
+	        <button data-cid="${t.cid}" type="button" class="commentDelete w3-button w3-red w3-margin-bottom">Delete</button> 
+	        <br />
+	    </c:when>    
+	    <c:otherwise>
+	    </c:otherwise>
+	</c:choose>
+
  </div>
 </c:forEach>

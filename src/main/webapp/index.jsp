@@ -209,6 +209,37 @@ $(document).ready(function(){
 		});
 		event.preventDefault();
 	});
+	
+	/* View deleteTweetComment*/
+	$(document).on("click",".commentDelete",function(event) {
+		var user = $(this).parent();
+		console.log($(this).data("cid") )
+		$.post( "DeleComment", { cid: $(this).data("cid") ,}, function(event) { 
+			$("#content").load("DeleComment");		
+		});
+		event.preventDefault();
+	});
+	
+	/* View commentEdit*/ 
+	$(document).on("click",".commentEdit",function(event) {
+		var user = $(this).parent();
+		console.log($(this).data("cid") )
+		$.post( "EditCommentController", { cid: $(this).data("cid") ,}, function(event) { 
+			$("#content").load("EditCommentController");		
+		});
+		event.preventDefault();
+	});
+	
+	/* View updateCommentInfo*/
+	$(document).on("click",".updateCommentInfo",function(event) {
+		var user = $(this).parent();
+		console.log($(this).data("cid") )
+		console.log( $("textarea[name=inputTweetCommentEdit]").val() )
+		$.post( "UpdateCommentController", { cid: $(this).data("cid") , comment: $("textarea[name=inputTweetCommentEdit]").val() }, function(event) { 
+			$("#content").load("UpdateCommentController");		
+		});
+		event.preventDefault();
+	});
 });
 </script>
 </head>

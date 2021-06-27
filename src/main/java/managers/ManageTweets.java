@@ -123,18 +123,19 @@ public class ManageTweets {
 	}
 	
 	/* Get tweets coment from a user given start and end*/
-	public List<Tweet> getUserCommentTweets(Integer id,Integer start, Integer end) {
-		 String query = "select uid, comment, tid FROM comments where tid= ? ORDER BY comments.tid DESC LIMIT ?,?;";
+	public List<Tweet> getUserCommentTweets(Integer tid,Integer start, Integer end) {
+		 String query = "select id, uid, comment, tid FROM comments where tid= ? ORDER BY comments.tid DESC LIMIT ?,?;";
 		 PreparedStatement statement = null;
 		 List<Tweet> l = new ArrayList<Tweet>();
 		 try {
 			 statement = db.prepareStatement(query);
-			 statement.setInt(1,id);
+			 statement.setInt(1,tid);
 			 statement.setInt(2,start);
 			 statement.setInt(3,end);
 			 ResultSet rs = statement.executeQuery();
 			 while (rs.next()) {
 				 Tweet tweet = new Tweet();
+				 tweet.setCid(rs.getInt("id"));
        		     tweet.setId(rs.getInt("tid"));
 				 tweet.setUid(rs.getInt("uid"));
 				 tweet.setComment(rs.getString("comment"));
@@ -146,6 +147,57 @@ public class ManageTweets {
 			e.printStackTrace();
 		} 
 		return  l;
+	}
+	
+	/* Delete tweets coment*/
+	public void deletetUserCommentTweets(Integer cid) {
+		 String query = "delete FROM comments where id= ?;";
+			PreparedStatement statement = null;
+			try {
+				statement = db.prepareStatement(query);
+				statement.setInt(1,cid);
+				statement.executeUpdate();
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	
+	/* Update existing tweet comment*/
+	public void updateComment(Tweet tweet) {
+		String query = "UPDATE comments SET comments.comment = ? WHERE comments.id = ?;";
+		PreparedStatement statement = null;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1, tweet.getComment());
+			statement.setInt(2, tweet.getCid());
+			statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	/* Get tweets Comment*/
+	public Tweet getTweetComment(Integer cid) {
+		 String query = "SELECT id, tid, uid, comment from comments where comments.id = ?";
+		 PreparedStatement statement = null;
+		 Tweet tweet = new Tweet();
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1,cid);
+			 ResultSet rs = statement.executeQuery();
+			 while (rs.next()) {
+				 tweet.setCid(rs.getInt("id"));
+       		     tweet.setId(rs.getInt("tid"));
+				 tweet.setUid(rs.getInt("uid"));
+				 tweet.setComment(rs.getString("comment"));
+			 }
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return  tweet;
 	}
 	
 	
