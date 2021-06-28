@@ -23,8 +23,16 @@
 	        <button data-cid="${t.cid}" type="button" class="commentEdit w3-row w3-button w3-green w3-section">Edit</button>
 	        <button data-cid="${t.cid}" type="button" class="commentDelete w3-button w3-red w3-margin-bottom">Delete</button> 
 	        <br />
+	    </c:when> 
+	    <c:otherwise>
+	    </c:otherwise>
+	</c:choose>
+	<c:choose>
+	    <c:when test="${t.cliked}">
+			<button type="button" data-userid="${t.uid}" data-cid="${t.cid}" data-isliked="${t.cliked}" class="w3-button w3-theme w3-margin-bottom commentdislikeBTN"><i class="fa fa-thumbs-up"></i> &nbsp;Dislike</button>
 	    </c:when>    
 	    <c:otherwise>
+	    	<button type="button"  data-userid="${t.uid}" data-cid="${t.cid}"  class="w3-button w3-theme w3-margin-bottom commentlikeBTN"><i class="fa fa-thumbs-up" ></i> &nbsp;Like</button>
 	    </c:otherwise>
 	</c:choose>
 

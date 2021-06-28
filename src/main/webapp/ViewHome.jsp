@@ -17,7 +17,6 @@
 
 <div class="flex w3-container">
 	<div class="content">
-		<h3> Most Popular Post [remember to implement order by likes]</h3>
 		<c:forEach var="t" items="${tweets}">       
 		 <div id="${t.id}" class="w3-container w3-card w3-section w3-white w3-round w3-animate-opacity"><br>
 		   <img src="imgs/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
@@ -25,7 +24,7 @@
 		   <h4> ${t.uname} </h4><br>
 		   <hr class="w3-clear">
 		   <p> ${t.content} </p>
-		   <button type="button" class="likeTweet w3-button w3-theme w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
+		   <button type="button" data-userid="${t.uid}" data-isliked="${t.liked}"  class="w3-button w3-theme w3-margin-bottom likeBTN"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
 		 </div>
 		</c:forEach>
 	</div>

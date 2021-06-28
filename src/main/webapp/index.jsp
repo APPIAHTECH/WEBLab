@@ -240,6 +240,74 @@ $(document).ready(function(){
 		});
 		event.preventDefault();
 	});
+	
+	/* View likeBTNt*/ 
+	$(document).on("click",".likeBTN",function(event) {
+		var user = $(this).parent();
+		console.log($(this).parent().attr("id"))
+		console.log( $(this).data("userid") )
+		$.post( "LikeController", 
+			{
+				userID: $(this).data("userid") ,
+				id: $(this).parent().attr("id"),
+				iscomment: false
+			}, function(event) { 
+			$("#content").load("LikeController");		
+		});
+		event.preventDefault();
+	});
+	
+	/* View dislikeBTNt*/
+	$(document).on("click",".dislikeBTN",function(event) {
+		var user = $(this).parent();
+		console.log($(this).parent().attr("id"))
+		console.log( $(this).data("userid") )
+		$.post( "DisLikeController", 
+			{
+				userID: $(this).data("userid") ,
+				id: $(this).parent().attr("id"),
+				iscomment: false
+			}, function(event) { 
+			$("#content").load("DisLikeController");		
+		});
+		event.preventDefault();
+	});
+	
+	/* View commentlikeBTN*/ 
+	$(document).on("click",".commentlikeBTN",function(event) {
+		var user = $(this).parent();
+		console.log($(this).parent().attr("id"))
+		console.log( $(this).data("userid") )
+		console.log($(this).data("cid") )
+		$.post( "LikeController", 
+			{
+				userID: $(this).data("userid") ,
+				id: $(this).parent().attr("id"),
+				cid: $(this).data("cid"),
+				iscomment: true
+			}, function(event) { 
+			$("#content").load("LikeController");		
+		});
+		event.preventDefault();
+	});
+	
+	/* View commentdislikeBTN*/
+	$(document).on("click",".commentdislikeBTN",function(event) {
+		var user = $(this).parent();
+		console.log($(this).parent().attr("id"))
+		console.log( $(this).data("userid") )
+		console.log( $(this).data("cid"), )
+		$.post( "DisLikeController", 
+			{
+				userID: $(this).data("userid") ,
+				id: $(this).parent().attr("id"),
+				cid: $(this).data("cid"),
+				iscomment: true
+			}, function(event) { 
+			$("#content").load("DisLikeController");		
+		});
+		event.preventDefault();
+	});
 });
 </script>
 </head>

@@ -93,6 +93,54 @@ public class ManageTweets {
 		}
 	}
 	
+	/* Set tweet like */
+	public void setLike(Tweet tweet, Integer uid, boolean isComment) {
+		String query = "INSERT INTO likes (`id`,`uid`,`is_like`,`tid`, `cid`) VALUES (0, ?, ?, ?, -1);";
+		
+		if(isComment) query = "INSERT INTO likes (`id`,`uid`,`is_like`,`tid`, `cid`) VALUES (0, ?, ?, -1, ?);";
+		PreparedStatement statement = null;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			
+			if(isComment) {
+				statement.setBoolean(2, tweet.getCliked());
+				statement.setInt(3, tweet.getCid());
+			}
+			else {
+				statement.setBoolean(2, tweet.getLiked());
+				statement.setInt(3, tweet.getId());
+			}
+			
+			statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/* Set tweet dislike */
+	public void setDisLike(Tweet tweet, Integer uid, boolean isComment) {
+		String query = "DELETE from likes where uid =? and tid =? ";
+		
+		if(isComment) query = "DELETE from likes where uid =? and cid =?";
+		PreparedStatement statement = null;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			if(isComment) {
+				statement.setInt(2, tweet.getCid());
+			}
+			else {
+				statement.setInt(2, tweet.getId());
+			}
+			System.out.println(statement);
+			statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	/* Get tweets from a user given start and end*/
 	public List<Tweet> getUserTweets(Integer uid,Integer start, Integer end) {
 		 String query = "SELECT tweets.id,tweets.uid,tweets.postdatetime,tweets.content,users.name FROM tweets INNER JOIN users ON tweets.uid = users.id where tweets.uid = ? ORDER BY tweets.postdatetime DESC LIMIT ?,? ;";
@@ -113,6 +161,13 @@ public class ManageTweets {
 				 tweet.setContent(rs.getString("content"));
 				 tweet.setUname(rs.getString("name"));
 				 l.add(tweet);
+			 }
+			 for(Tweet t: l){
+				 query = "SELECT is_like from likes where tid = ?;";
+				 statement = db.prepareStatement(query);
+				 statement.setInt(1, t.getId());
+				 rs = statement.executeQuery();
+				 while (rs.next()) t.setLiked(rs.getBoolean("is_like"));
 			 }
 			 rs.close();
 			 statement.close();
@@ -140,6 +195,13 @@ public class ManageTweets {
 				 tweet.setUid(rs.getInt("uid"));
 				 tweet.setComment(rs.getString("comment"));
 				 l.add(tweet);
+			 }
+			 for(Tweet t: l){
+				 query = "SELECT is_like from likes where cid = ?;";
+				 statement = db.prepareStatement(query);
+				 statement.setInt(1, t.getCid());
+				 rs = statement.executeQuery();
+				 while (rs.next()) t.setCliked((rs.getBoolean("is_like")));
 			 }
 			 rs.close();
 			 statement.close();
@@ -192,6 +254,11 @@ public class ManageTweets {
 				 tweet.setUid(rs.getInt("uid"));
 				 tweet.setComment(rs.getString("comment"));
 			 }
+			 query = "SELECT is_like from likes where cid = ?;";
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1, cid);
+			 rs = statement.executeQuery();
+			 while (rs.next()) tweet.setCliked((rs.getBoolean("is_like")));
 			 rs.close();
 			 statement.close();
 		} catch (SQLException e) {
@@ -218,6 +285,11 @@ public class ManageTweets {
 				 tweet.setContent(rs.getString("content"));
 				 tweet.setUname(rs.getString("name"));
 			 }
+			 query = "SELECT is_like from likes where tid = ?;";
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1, id);
+			 rs = statement.executeQuery();
+			 while (rs.next()) tweet.setLiked(rs.getBoolean("is_like"));
 			 rs.close();
 			 statement.close();
 		} catch (SQLException e) {
