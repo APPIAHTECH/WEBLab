@@ -52,20 +52,15 @@ public class GetProfile extends HttpServlet {
 		ManageTweets tweetManager = new ManageTweets();
 		
         
-        if(request.getParameter("userID") != null) {
-        	paramValue = request.getParameter("userID");
-        }
+        if(request.getParameter("userID") != null) paramValue = request.getParameter("userID");
         
-        System.out.println(paramValue);
     	int userID = Integer.parseInt(paramValue);
     	user.setId(userID);
-
-    	System.out.println("integer value"+userID);
 		user = userManager.getUser(user.getId());
     	
 		tweets = tweetManager.getUserTweets(user.getId(),0,4);
-    	for(Tweet tweet: tweets) System.out.println(tweet.getContent());
-    	
+		for(Tweet t : tweets) t.setLkes(tweetManager.getTweetTotalLikes(t.getId()));
+		
 		request.setAttribute("tweets",tweets);
    		request.setAttribute("user",user);
 		request.setAttribute("menu","ViewMenuNotLogged.jsp");

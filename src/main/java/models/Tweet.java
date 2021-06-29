@@ -1,13 +1,14 @@
 package models;
 import java.sql.Timestamp;
 
-public class Tweet implements java.io.Serializable {
+public class Tweet implements java.io.Serializable  {
 
 	 private static final long serialVersionUID = 1L;
 
 	 private int id;
 	 private int uid;
 	 private int cid;
+	 private int likes;
 	 private boolean liked;
 	 private boolean cliked;
 	 private String uname;
@@ -38,6 +39,14 @@ public class Tweet implements java.io.Serializable {
 
 	 public int getUid() {
 		 return this.uid;
+	 }
+	 
+	 public void setLkes(Integer likes) {
+		 this.likes = likes;
+	 }
+
+	 public int getLikes() {
+		 return this.likes;
 	 }
 	 
 	 public void setUid(int uid) {

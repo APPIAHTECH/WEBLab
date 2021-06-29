@@ -33,7 +33,7 @@ CREATE TABLE `tweets` (
   KEY `tweets_tweets_fk` (`pid`),
   CONSTRAINT `tweets_tweets_fk` FOREIGN KEY (`pid`) REFERENCES `tweets` (`id`) ON DELETE CASCADE,
   CONSTRAINT `tweets_users_fk` FOREIGN KEY (`uid`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `tweets` (
 
 LOCK TABLES `tweets` WRITE;
 /*!40000 ALTER TABLE `tweets` DISABLE KEYS */;
-INSERT INTO `tweets` VALUES (77,1,'2021-06-02 20:15:49','hola',NULL),(81,1,'2021-06-24 17:12:37','hola mon',NULL);
+INSERT INTO `tweets` VALUES (88,7,'2021-06-25 21:11:09',' Kamekame45',NULL),(94,1,'2021-06-29 11:46:19',' hola from oriolasdsad',NULL);
 /*!40000 ALTER TABLE `tweets` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-24 20:04:12
+-- Dump completed on 2021-06-29 14:01:56

@@ -46,11 +46,10 @@ public class EditTweetController extends HttpServlet {
 	        if(request.getParameter("id") != null) {
 	        	paramValue = request.getParameter("id");
 	        	tweetID = Integer.parseInt(paramValue);
-	        	System.out.println(tweetID);
 	        }
 			ManageTweets tweetManager = new ManageTweets();
 			tweets.add(tweetManager.getUserTweet(user.getId(), tweetID));
-			System.out.println(tweets);
+			for(Tweet t : tweets) t.setLkes(tweetManager.getTweetTotalLikes(t.getId()));
 			tweetManager.finalize();
 		}
 		request.setAttribute("user",user);

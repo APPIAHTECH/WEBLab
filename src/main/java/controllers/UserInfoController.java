@@ -50,6 +50,7 @@ public class UserInfoController extends HttpServlet {
 	    	userID = Integer.parseInt(paramValue);
 	    	user = manager.getUser(userID);
 	    	tweets = managerTweet.getUserTweets(userID, 0, 4);
+	    	for(Tweet t : tweets) t.setLkes(managerTweet.getTweetTotalLikes(t.getId()));
 			manager.finalize();
 			request.setAttribute("user",user);
 			request.setAttribute("tweets",tweets);

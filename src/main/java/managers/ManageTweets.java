@@ -61,6 +61,20 @@ public class ManageTweets {
 		}
 	}
 	
+	/* Delete existing tweet */
+	public void deleteTweet(Integer id) {
+		String query = "DELETE FROM tweets WHERE id = ?";
+		PreparedStatement statement = null;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1,id);
+			statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/* Update existing tweet */
 	public void updateTweet(Tweet tweet,Integer uid) {
 		String query = "UPDATE tweets,users SET tweets.content=? WHERE tweets.id=? and users.id=?";
@@ -76,6 +90,22 @@ public class ManageTweets {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Update existing tweet */
+	public void updateTweet(Tweet tweet) {
+		String query = "UPDATE tweets,users SET tweets.content=? WHERE tweets.id=?";
+		PreparedStatement statement = null;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1, tweet.getContent());
+			statement.setInt(2, tweet.getId());
+			statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	/* Add comment to tweet */
 	public void addComment(Tweet tweet, Integer uid) {
@@ -267,6 +297,23 @@ public class ManageTweets {
 		return  tweet;
 	}
 	
+	/* Get tweets total likes*/
+	public int getTweetTotalLikes(Integer tid) {
+		 String query = "select count(*) as likes from likes where tid = ?";
+		 PreparedStatement statement = null;
+		 int likes = 0;
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1,tid);
+			 ResultSet rs = statement.executeQuery();
+			 while (rs.next()) likes = rs.getInt("likes");
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		 return likes;
+	}
 	
 	/* Get 1 tweets from a user given */
 	public Tweet getUserTweet(Integer uid,Integer id) {

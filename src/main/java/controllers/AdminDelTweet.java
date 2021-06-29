@@ -23,7 +23,8 @@ import models.User;
 @WebServlet("/AdminDelTweet")
 public class AdminDelTweet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	public String paramValue;
+	int userID = -1, tweetID = -1;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,18 +42,19 @@ public class AdminDelTweet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("user");
 		
-		try {
-			if (session != null || user != null) {
-				BeanUtils.populate(tweet, request.getParameterMap());
-				tweetManager.deleteTweet(tweet.getId(),user.getId());
-				tweetManager.finalize();
-			}
-			
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
+		if (session != null || user != null) {
+			 if(request.getParameter("id") != null && request.getParameter("userID") != null) {
+		        	paramValue = request.getParameter("id");
+		        	tweetID = Integer.parseInt(paramValue);
+		        	paramValue = request.getParameter("userID");
+		        	userID = Integer.parseInt(paramValue);
+					tweetManager.deleteTweet(tweetID);
+					System.out.println( "Tweet deleted");
+		        }
+
+			tweetManager.finalize();
 		}
-		System.out.println( "Tweet deleted");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/AdminViewTweets.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("AdminViewTweetsController");
 		dispatcher.forward(request, response);
 	}
 

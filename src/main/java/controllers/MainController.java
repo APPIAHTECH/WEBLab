@@ -54,10 +54,18 @@ public class MainController extends HttpServlet {
 		for (User user: users) {
 			tweets = tweetManager.getUserTweets(user.getId(),0,4);
 			for (Tweet tweet: tweets) {
+				tweet.setLkes(tweetManager.getTweetTotalLikes(tweet.getId()));
 				finalTweets.add(tweet);
 			}
 		}
 		
+		//Sort for the most popular tweet
+		Collections.sort(finalTweets, new Comparator<Tweet>() {
+			@Override
+			public int compare(Tweet o1, Tweet o2) {
+				// TODO Auto-generated method stub
+				return Integer.valueOf( o2.getLikes()).compareTo(o1.getLikes() );
+			}});
 		request.setAttribute("users",users);
 		request.setAttribute("tweets",finalTweets);
 		userManager.finalize();

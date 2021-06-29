@@ -52,6 +52,7 @@ public class CommentController extends HttpServlet {
 	        }
 			ManageTweets tweetManager = new ManageTweets();
 			tweets.add(tweetManager.getUserTweet(userID, tweetID));
+			for(Tweet t : tweets) t.setLkes(tweetManager.getTweetTotalLikes(t.getId()));
 			tweetsComments = tweetManager.getUserCommentTweets(tweetID, 0,4);
 			tweetManager.finalize();
 		}

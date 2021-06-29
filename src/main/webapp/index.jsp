@@ -129,7 +129,12 @@ $(document).ready(function(){
 	/* Delete admin, tweet */
 	$(document).on("click",".adminDelTweet",function(event){
 		var tweet = $(this).parent();
-		$.post( "AdminDelTweet", { id: $(this).parent().attr("id") } , function(event) {
+		console.log($(this).data("userid") )
+		console.log($(this).data("id") )
+		$.post( "AdminDelTweet", {
+			userID: $(this).data("userid") ,
+			id: $(this).data("id")
+		} , function(event) {
 			$("#content").load("AdminDelTweet");				
 		});
 		event.preventDefault();

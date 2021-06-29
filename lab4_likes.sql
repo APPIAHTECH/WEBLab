@@ -16,30 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `follows`
+-- Table structure for table `likes`
 --
 
-DROP TABLE IF EXISTS `follows`;
+DROP TABLE IF EXISTS `likes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `follows` (
-  `uid` int NOT NULL,
-  `fid` int NOT NULL,
-  PRIMARY KEY (`uid`,`fid`),
-  KEY `fid_users_fk` (`fid`),
-  CONSTRAINT `fid_users_fk` FOREIGN KEY (`fid`) REFERENCES `users` (`id`),
-  CONSTRAINT `uid_users_fk` FOREIGN KEY (`uid`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `likes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `uid` int DEFAULT NULL,
+  `is_like` tinyint(1) NOT NULL,
+  `tid` varchar(20) NOT NULL,
+  `cid` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `follows`
+-- Dumping data for table `likes`
 --
 
-LOCK TABLES `follows` WRITE;
-/*!40000 ALTER TABLE `follows` DISABLE KEYS */;
-INSERT INTO `follows` VALUES (2,1),(7,1),(7,2),(1,7),(1,10);
-/*!40000 ALTER TABLE `follows` ENABLE KEYS */;
+LOCK TABLES `likes` WRITE;
+/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+INSERT INTO `likes` VALUES (41,1,1,'-1',1),(43,1,1,'-1',23),(48,1,1,'-1',27),(50,7,1,'-1',25),(65,1,1,'93',-1),(66,1,1,'94',-1),(67,1,1,'-1',28);
+/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-29 14:01:57
+-- Dump completed on 2021-06-29 14:01:56

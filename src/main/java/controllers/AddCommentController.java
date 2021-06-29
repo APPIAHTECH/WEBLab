@@ -52,7 +52,7 @@ public class AddCommentController extends HttpServlet {
 		    }
 		}
 		System.out.println( "Comment added");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewComment.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("CommentController");
 		dispatcher.forward(request, response);
 	}
 

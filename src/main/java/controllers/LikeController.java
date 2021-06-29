@@ -37,7 +37,7 @@ public class LikeController extends HttpServlet {
 		Tweet tweet = new Tweet();
 		ManageTweets tweetManager = new ManageTweets();
 		HttpSession session = request.getSession(false);
-		User user = new User();
+		User user = null;
 		
 
 		if (session==null || session.getAttribute("user")==null) {
@@ -45,7 +45,8 @@ public class LikeController extends HttpServlet {
 			request.setAttribute("menu","ViewMenuNotLogged.jsp");
 			request.setAttribute("content","ViewLoginForm.jsp");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("LoginController");
-			dispatcher.forward(request, response);	
+			dispatcher.forward(request, response);
+			return;
 		}
 		else {
 		    if(request.getParameter("userID") != null && request.getParameter("id") != null && request.getParameter("iscomment") != null) 
@@ -60,11 +61,9 @@ public class LikeController extends HttpServlet {
 			    {
 			    	tweet.setCliked(true);
 			    	tweet.setCid(Integer.parseInt(request.getParameter("cid")));
-			    	System.out.println("hola -> "+tweet.getCid());
 					tweetManager.setLike(tweet, userID, true);
 			    }else 
 			    {
-			    	System.out.println("hola -> "+tweet.getId());
 			    	tweet.setLiked(true);
 					tweetManager.setLike(tweet, userID, false);
 			    }

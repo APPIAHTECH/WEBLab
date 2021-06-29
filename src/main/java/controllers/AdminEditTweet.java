@@ -53,7 +53,9 @@ public class AdminEditTweet extends HttpServlet {
 		    	tweet = tweetManager.getUserTweet(userID , tweetID);
 		    	paramValue = request.getParameter("tweetContent");
 		    	tweet.setContent(paramValue);
-				tweetManager.updateTweet(tweet, userID);
+		    	tweet.setId(tweetID);
+		    	tweet.setLkes(tweetManager.getTweetTotalLikes(tweet.getId()));
+				tweetManager.updateTweet(tweet);
 				tweetManager.finalize();
 		    }
 

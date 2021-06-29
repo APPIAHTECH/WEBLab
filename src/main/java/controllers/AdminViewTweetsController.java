@@ -50,7 +50,8 @@ public class AdminViewTweetsController extends HttpServlet {
 	        }
 			ManageTweets tweetManager = new ManageTweets();
 			tweets = tweetManager.getUserTweets(userID,0,4);
-			
+			for(Tweet t : tweets) t.setLkes(tweetManager.getTweetTotalLikes(t.getId()));
+
 			tweetManager.finalize();
 		}
 		request.setAttribute("user",user);
