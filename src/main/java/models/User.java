@@ -13,7 +13,7 @@ public class User implements java.io.Serializable {
 	private String name = "";
 	private String mail = "";
 	private String pwd = "";
-	private String userType = "regular";
+	private String userType = "";
 
 	private HashMap<String,Boolean> error = null;
 	
@@ -21,6 +21,7 @@ public class User implements java.io.Serializable {
 		 error = new HashMap<String, Boolean>();
 		 error.put("user", false);
 		 error.put("mail", false);
+		 this.userType = "regular";
 	}
 	
 	

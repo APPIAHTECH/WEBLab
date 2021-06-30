@@ -9,6 +9,8 @@ public class Tweet implements java.io.Serializable  {
 	 private int uid;
 	 private int cid;
 	 private int likes;
+	 private int comments;
+	 private int clks; //tot comment likes
 	 private boolean liked;
 	 private boolean cliked;
 	 private String uname;
@@ -31,6 +33,22 @@ public class Tweet implements java.io.Serializable  {
 	 
 	 public void setCid(Integer cid) {
 		 this.cid = cid;
+	 }
+	 
+	 public Integer getComments() {
+		 return this.comments;
+	 }
+	 
+	 public void setClks(Integer clks) {
+		 this.clks = clks;
+	 }
+	 
+	 public Integer getClks() {
+		 return this.clks;
+	 }
+	 
+	 public void setComments(Integer comments) {
+		 this.comments = comments;
 	 }
 	 
 	 public void setId(Integer id) {

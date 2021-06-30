@@ -53,13 +53,21 @@ public class CommentController extends HttpServlet {
 			ManageTweets tweetManager = new ManageTweets();
 			tweets.add(tweetManager.getUserTweet(userID, tweetID));
 			for(Tweet t : tweets) t.setLkes(tweetManager.getTweetTotalLikes(t.getId()));
+
 			tweetsComments = tweetManager.getUserCommentTweets(tweetID, 0,4);
+			for(Tweet t: tweetsComments){
+				t.setLiked(false);
+				t = tweetManager.getUserCommentTweets(t, user.getId());
+				t.setComments(tweetManager.getTweetTotalComments(t.getId()));
+				t.setClks(tweetManager.getTweetTotalCommentLikes(t.getCid()));
+			}
 			tweetManager.finalize();
 		}
 		
 		request.setAttribute("user",user);
 		request.setAttribute("tweets",tweets);
 		request.setAttribute("comment",tweetsComments);
+		request.setAttribute("totalComment", tweetsComments.get(0).getComments());
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewComment.jsp"); 
 		dispatcher.forward(request,response);
 	}

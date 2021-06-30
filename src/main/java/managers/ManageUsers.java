@@ -60,13 +60,14 @@ public class ManageUsers {
 		
 	// Add new user
 	public void addUser(User user) {
-		String query = "INSERT INTO users (name,mail,pwd) VALUES (?,?,?)";
+		String query = "INSERT INTO users (name,mail,pwd, user_type) VALUES (?,?,?, ?)";
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
 			statement.setString(1,user.getName());
 			statement.setString(2,user.getMail());
 			statement.setString(3,user.getPwd());
+			statement.setString(4,user.getUserType());
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLIntegrityConstraintViolationException e) {
@@ -78,9 +79,26 @@ public class ManageUsers {
 	
 	//Delete user
 	public void deleteUser(Integer uid) {
-		String query = "delete FROM follows where follows.fid = ?;";
+		String query = "delete FROM follows where follows.uid = ?;";
 		PreparedStatement statement = null;
 		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1,uid);
+			statement.executeUpdate();
+			
+			
+			query = "delete FROM tweets where tweets.uid = ?;";
+			statement = db.prepareStatement(query);
+			statement.setInt(1,uid);
+			statement.executeUpdate();
+			
+			
+			query = "delete FROM comments where comments.uid = ?;";
+			statement = db.prepareStatement(query);
+			statement.setInt(1,uid);
+			statement.executeUpdate();
+			
+			query = "delete FROM likes where likes.uid = ?;";
 			statement = db.prepareStatement(query);
 			statement.setInt(1,uid);
 			statement.executeUpdate();
@@ -89,11 +107,7 @@ public class ManageUsers {
 			statement = db.prepareStatement(query);
 			statement.setInt(1,uid);
 			statement.executeUpdate();
-			
-			query = "delete FROM tweets where tweets.uid = ?;";
-			statement = db.prepareStatement(query);
-			statement.setInt(1,uid);
-			statement.executeUpdate();
+
 			
 			statement.close();
 		} catch (SQLException e) {
@@ -319,6 +333,7 @@ public class ManageUsers {
 	/*Check if all the user is admin are filled correctly */
 	public boolean isAdmin(User user) {
 		User us = this.getUser(user.getId());
+		if(us == null) return false;
 		if( us.getUserType().toLowerCase().compareTo("admin") == 0) return true;
 		return false;
 	}

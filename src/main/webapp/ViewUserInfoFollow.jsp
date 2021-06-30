@@ -17,15 +17,5 @@
    <h4> ${t.uname} </h4><br>
    <hr class="w3-clear">
    <p> ${t.content} </p>
-   	      <c:choose>
-	    <c:when test="${t.liked}">
-			<button type="button" data-userid="${t.uid}" data-isliked="${t.liked}" class="w3-button w3-theme w3-margin-bottom dislikeBTN"><i class="fa fa-thumbs-up"></i> &nbsp;Dislike</button>
-	    </c:when>    
-	    <c:otherwise>
-	    	<button type="button"  data-userid="${t.uid}" data-isliked="${t.liked}"  class="w3-button w3-theme w3-margin-bottom likeBTN"><i class="fa fa-thumbs-up" ></i> &nbsp;Like</button>
-	    </c:otherwise>
-	</c:choose>
-	  
-   <button type="button" data-userid="${t.uid}" class="viewCommentTweet w3-button w3-red w3-margin-bottom">Comment</button> 
  </div>
 </c:forEach>

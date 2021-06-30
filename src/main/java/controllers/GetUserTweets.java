@@ -52,10 +52,22 @@ public class GetUserTweets extends HttpServlet {
 			for(User us: userFolow)
 			{
 				List<Tweet> temp_tweet = tweetManager.getUserTweets(us.getId(), 0, 4);
-				for(Tweet t: temp_tweet) tweets_view_follow.add(t);
+				for(Tweet t: temp_tweet) 
+				{
+					t = tweetManager.getUserTweets(t, user.getId());
+					tweets_view_follow.add(t);
+				}
 			}
-			for(Tweet t : tweets) t.setLkes(tweetManager.getTweetTotalLikes(t.getId()));
-			for(Tweet t : tweets_view_follow) t.setLkes(tweetManager.getTweetTotalLikes(t.getId()));
+			for(Tweet t : tweets) {
+				t = tweetManager.getUserTweets(t, user.getId());
+				t.setLkes(tweetManager.getTweetTotalLikes(t.getId()));
+			}
+			for(Tweet t : tweets_view_follow) 
+			{
+				t.setLiked(false);
+				t = tweetManager.getUserTweets(t, user.getId());
+				t.setLkes(tweetManager.getTweetTotalLikes(t.getId()));
+			}
 			tweetManager.finalize();
 		}
 

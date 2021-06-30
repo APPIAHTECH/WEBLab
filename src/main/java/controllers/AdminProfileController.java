@@ -57,7 +57,7 @@ public class AdminProfileController extends HttpServlet {
 			User u = new User();
 			u = (User) session.getAttribute("user");
 			ManageUsers manager = new ManageUsers();
-			if(manager.isAdmin(u))
+			if(manager.isAdmin(u) && u != null)
 			{
 				System.out.println("Admin Controller: active session has been found.");
 				request.setAttribute("menu","ViewMenuLogged.jsp");

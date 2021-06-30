@@ -193,9 +193,10 @@ public class ManageTweets {
 				 l.add(tweet);
 			 }
 			 for(Tweet t: l){
-				 query = "SELECT is_like from likes where tid = ?;";
+				 query = "SELECT is_like from likes where tid = ? and uid = ?";
 				 statement = db.prepareStatement(query);
 				 statement.setInt(1, t.getId());
+				 statement.setInt(2,uid);
 				 rs = statement.executeQuery();
 				 while (rs.next()) t.setLiked(rs.getBoolean("is_like"));
 			 }
@@ -205,6 +206,27 @@ public class ManageTweets {
 			e.printStackTrace();
 		} 
 		return  l;
+	}
+	
+
+	/* Get tweets only is_likes from a use*/
+	public Tweet getUserTweets(Tweet tweet , Integer uid) {
+		 String query = "SELECT is_like from likes where tid = ? and uid = ?";
+		 PreparedStatement statement = null;
+		 try {
+			 
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1, tweet.getId());
+			 statement.setInt(2,uid);
+			 ResultSet rs = statement.executeQuery();
+			 rs = statement.executeQuery();
+			 while (rs.next()) tweet.setLiked(rs.getBoolean("is_like"));
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return  tweet;
 	}
 	
 	/* Get tweets coment from a user given start and end*/
@@ -226,13 +248,6 @@ public class ManageTweets {
 				 tweet.setComment(rs.getString("comment"));
 				 l.add(tweet);
 			 }
-			 for(Tweet t: l){
-				 query = "SELECT is_like from likes where cid = ?;";
-				 statement = db.prepareStatement(query);
-				 statement.setInt(1, t.getCid());
-				 rs = statement.executeQuery();
-				 while (rs.next()) t.setCliked((rs.getBoolean("is_like")));
-			 }
 			 rs.close();
 			 statement.close();
 		} catch (SQLException e) {
@@ -240,6 +255,26 @@ public class ManageTweets {
 		} 
 		return  l;
 	}
+	
+	/* Get tweets only likes coment from a user given start and end*/
+	public Tweet getUserCommentTweets(Tweet tweet , Integer uid) {
+		 String query  = "SELECT is_like from likes where cid = ? and uid = ?;";
+		 PreparedStatement statement = null;
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1, tweet.getCid());
+			 statement.setInt(2, uid);
+			 ResultSet rs = statement.executeQuery();
+			 rs = statement.executeQuery();
+			 while (rs.next()) tweet.setCliked((rs.getBoolean("is_like")));
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return  tweet;
+	}
+	
 	
 	/* Delete tweets coment*/
 	public void deletetUserCommentTweets(Integer cid) {
@@ -315,6 +350,43 @@ public class ManageTweets {
 		 return likes;
 	}
 	
+	/* Get tweets comment total comment*/
+	public int getTweetTotalComments(Integer tid) {
+		 String query = "select count(*) as total from comments where tid = ?";
+		 PreparedStatement statement = null;
+		 int likes = 0;
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1,tid);
+			 ResultSet rs = statement.executeQuery();
+			 while (rs.next()) likes = rs.getInt("total");
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		 return likes;
+	}
+	
+	/* Get tweets comment total comment*/
+	public int getTweetTotalCommentLikes(Integer cid) {
+		 String query = "select count(*) as likes from likes where cid = ?";
+		 PreparedStatement statement = null;
+		 int likes = 0;
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1,cid);
+			 ResultSet rs = statement.executeQuery();
+			 while (rs.next()) likes = rs.getInt("likes");
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		 return likes;
+	}
+	
+	
 	/* Get 1 tweets from a user given */
 	public Tweet getUserTweet(Integer uid,Integer id) {
 		 String query = "SELECT tweets.id,tweets.uid,tweets.postdatetime,tweets.content,users.name FROM tweets INNER JOIN users ON tweets.uid = users.id where tweets.uid = ? and tweets.id = ?";
@@ -332,9 +404,10 @@ public class ManageTweets {
 				 tweet.setContent(rs.getString("content"));
 				 tweet.setUname(rs.getString("name"));
 			 }
-			 query = "SELECT is_like from likes where tid = ?;";
+			 query = "SELECT is_like from likes where tid = ? and uid = ?";
 			 statement = db.prepareStatement(query);
 			 statement.setInt(1, id);
+			 statement.setInt(2,uid);
 			 rs = statement.executeQuery();
 			 while (rs.next()) tweet.setLiked(rs.getBoolean("is_like"));
 			 rs.close();

@@ -37,7 +37,7 @@ public class LikeController extends HttpServlet {
 		Tweet tweet = new Tweet();
 		ManageTweets tweetManager = new ManageTweets();
 		HttpSession session = request.getSession(false);
-		User user = null;
+		User user = (User) session.getAttribute("user");
 		
 
 		if (session==null || session.getAttribute("user")==null) {
@@ -61,11 +61,11 @@ public class LikeController extends HttpServlet {
 			    {
 			    	tweet.setCliked(true);
 			    	tweet.setCid(Integer.parseInt(request.getParameter("cid")));
-					tweetManager.setLike(tweet, userID, true);
+					tweetManager.setLike(tweet, user.getId(), true);
 			    }else 
 			    {
 			    	tweet.setLiked(true);
-					tweetManager.setLike(tweet, userID, false);
+					tweetManager.setLike(tweet, user.getId(), false);
 			    }
 				tweetManager.finalize();
 				System.out.println( "Liked");

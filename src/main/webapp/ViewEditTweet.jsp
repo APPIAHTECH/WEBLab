@@ -10,6 +10,5 @@
    <hr class="w3-clear">
    <input type="text" value=" ${t.content}" name="inputTweetContent">
    <button data-id="${t.id}" data-userid="${user.id}" data-content="${t.content}" type="button" class="w3-button w3-theme w3-margin-bottom updateTweetInfo">Save</button>
-   <button type="button" class="adminDelTweet w3-button w3-red w3-margin-bottom"><i class="fa fa-trash"></i> Delete</button> 
  </div>
 </c:forEach>

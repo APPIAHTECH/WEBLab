@@ -5,7 +5,7 @@
  <div id="${t.id}"  class="w3-container w3-card w3-section w3-white w3-round w3-animate-opacity"><br>
    <img src="imgs/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
    <span class="w3-right w3-opacity"> ${t.postDateTime} </span><br>
-   <span class="w3-right w3-opacity"> Likes ${t.likes} </span>
+   <span class="w3-right w3-opacity"> Likes ${t.likes} </span><br>
    <h4> ${t.uname} </h4><br>
    <hr class="w3-clear">
    <p> ${t.content} </p>
@@ -14,10 +14,12 @@
   <button data-id="${t.id}" data-userid="${t.uid}"  type="button" class="w3-button w3-theme w3-margin-bottom updateTweetComment">Save</button>
 </c:forEach>
 
-
-<h4> Comments </h4>
+<h4> Comments ${totalComment} </h4>
 <c:forEach var="t" items="${comment}">       
+
  <div id="${t.id}"  class="w3-container w3-card w3-section w3-white w3-round w3-animate-opacity"><br>
+   <span class="w3-right w3-opacity"> Likes ${t.clks} </span><br>
+   <hr class="w3-clear">
     <p>${t.comment}</p>
 	 <c:choose>
 	    <c:when test="${user.id== t.uid}">

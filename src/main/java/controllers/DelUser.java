@@ -47,10 +47,8 @@ public class DelUser extends HttpServlet {
 	        	paramValue = request.getParameter("userID");
 	        }
 	        
-	        System.out.println(paramValue);
 	    	int userID = Integer.parseInt(paramValue);
 	    	user.setId(userID);
-	    	
 			manager.deleteUser(user.getId());
 			System.out.println("User deleted");
 			manager.finalize();

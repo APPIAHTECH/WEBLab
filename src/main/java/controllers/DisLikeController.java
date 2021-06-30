@@ -36,7 +36,7 @@ public class DisLikeController extends HttpServlet {
 		Tweet tweet = new Tweet();
 		ManageTweets tweetManager = new ManageTweets();
 		HttpSession session = request.getSession(false);
-		User user = new User();
+		User user = (User) session.getAttribute("user");
 		
 		if (session != null || user != null) {
 		    if(request.getParameter("userID") != null && request.getParameter("id") != null && request.getParameter("iscomment") != null) 
@@ -51,11 +51,11 @@ public class DisLikeController extends HttpServlet {
 			    {
 			    	tweet.setCliked(false);
 			    	tweet.setCid(Integer.parseInt(request.getParameter("cid")));
-					tweetManager.setDisLike(tweet, userID, true);
+					tweetManager.setDisLike(tweet, user.getId(), true);
 			    }else 
 			    {
 			    	tweet.setLiked(false);
-					tweetManager.setDisLike(tweet, userID, false);
+					tweetManager.setDisLike(tweet, user.getId(), false);
 			    }
 				tweetManager.finalize();
 		    }
