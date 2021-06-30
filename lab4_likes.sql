@@ -29,7 +29,7 @@ CREATE TABLE `likes` (
   `tid` varchar(20) NOT NULL,
   `cid` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `likes` (
 
 LOCK TABLES `likes` WRITE;
 /*!40000 ALTER TABLE `likes` DISABLE KEYS */;
-INSERT INTO `likes` VALUES (41,1,1,'-1',1),(43,1,1,'-1',23),(48,1,1,'-1',27),(50,7,1,'-1',25),(65,1,1,'93',-1),(66,1,1,'94',-1),(67,1,1,'-1',28);
+INSERT INTO `likes` VALUES (94,12,1,'101',-1),(95,12,1,'99',-1),(97,12,1,'103',-1),(98,12,1,'-1',32),(99,12,1,'-1',34);
 /*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-29 14:01:56
+-- Dump completed on 2021-06-30 11:39:42

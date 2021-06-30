@@ -28,7 +28,7 @@ CREATE TABLE `comments` (
   `comment` varchar(255) NOT NULL,
   `tid` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,1,'Tom B. Erichsen','89'),(16,7,'      Goku es\n     el mejor del mundo','91'),(17,7,'hty','91'),(18,7,'broly','90'),(19,7,'hey','91'),(21,1,'tens rao soc','89'),(22,7,'ey','90'),(24,7,'hey this a comment','88'),(25,7,'hey','88'),(26,7,'what up','88'),(27,1,'what','93');
+INSERT INTO `comments` VALUES (1,1,'Tom B. Erichsen','89'),(21,1,'tens rao soc','89'),(27,1,'what','93'),(29,1,'hola mundo','94'),(31,12,'comment 2','99'),(32,12,'Esto es un commentario','102'),(34,12,'Hi there!','102');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-29 14:01:56
+-- Dump completed on 2021-06-30 11:39:42

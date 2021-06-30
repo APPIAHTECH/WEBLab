@@ -30,7 +30,7 @@ CREATE TABLE `users` (
   `user_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `mail` (`mail`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'oriol','oriol@gmail.com','Oriol82','admin'),(2,'oriolet','oriolet@gmail.com','Oriol82','regular'),(6,'ricard','ricard@gmail.com','Oriol82','regular'),(7,'goku','goku@gmail.com','CjrzqA4nRTZ5UgQ','regular'),(8,'pere','pere@gmail.com','Oriol82',NULL),(9,'pep','pep@gmail.com','Oriol82',NULL),(10,'joan','joan@gmail.com','Oriol82',NULL);
+INSERT INTO `users` VALUES (1,'oriol','oriol@gmail.com','Oriol82','admin'),(2,'oriolet','oriolet@gmail.com','Oriol82','regular'),(6,'ricard','ricard@gmail.com','Oriol82','regular'),(12,'pere','pere@gmail.com','Oriol82','regular'),(13,'pep','pep@gmail.com','Oriol82','regular'),(14,'joan','joan@gmail.com','Oriol82','regular');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-29 14:01:56
+-- Dump completed on 2021-06-30 11:39:41
